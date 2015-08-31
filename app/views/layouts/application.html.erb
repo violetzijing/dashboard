@@ -2,8 +2,25 @@
 <html>
 <head>
   <title>Dashboard</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
 </head>
 <body>
-<h1>hahah</h1>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Dashboard</a>
+      </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="/qadb_results">Qadb Validation Results</a></li>
+        <li><a href="#">Regression Results</a></li>
+        <li><a href="#">Performance Results</a></li>
+      </ul>
+    </div>
+  </nav>
+
 </body>
 </html>

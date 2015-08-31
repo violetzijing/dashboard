@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :qadb_results
-    match '/:id', to: 'qadb_results#show', via: :get
   end
+
+  match '*path_not_found', :to => 'main#index', via: :all
 end
