@@ -1,0 +1,25 @@
+// Place all the styles related to the main controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.ct-series-a .ct-line,
+.ct-series-a .ct-point {
+  stroke: green;
+}
+
+.ct-series-b .ct-line,
+.ct-series-b .ct-point {
+  stroke: red;
+}
+
+.ct-series-c .ct-line,
+.ct-series-c .ct-point {
+  stroke: blue;
+}
+
+.ct-series-d .ct-line,
+.ct-series-d .ct-point {
+  stroke: pink;
+}
+

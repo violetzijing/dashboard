@@ -39,6 +39,16 @@ module Api
       head :no_content
     end
 
+    def search_by_time
+      @qadb_results = QadbResult.where({ test_date: (DateTime.now - params[:day].to_i.day)..DateTime.now })
+      render json: @qadb_results
+    end
+
+    def search_by_testsuite_and_time
+      @qadb_results = QadbResult.where({ test_date: (DateTime.now - params[:day].to_i.day..DateTime.now), testsuite: params[:testsuite]})
+      render json: @qadb_results
+    end
+
     private
 
     def result_params

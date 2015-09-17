@@ -15,13 +15,12 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 # Use whenever to as cron
 gem 'whenever'
-# Use backbone-on-rails
-gem 'backbone-on-rails'
-
+# Use slim as rails template
+gem 'slim-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-#gem 'turbolinks'
+gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -38,6 +37,9 @@ gem 'responders'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+# Use Gon to access variables in js file
+gem 'gon'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

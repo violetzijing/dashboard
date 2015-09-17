@@ -1,0 +1,61 @@
+doctype html
+html
+  head
+    title QADB results
+
+  body
+    - if @results_list.any?
+      - @results_list.each do |item|
+        div class='panel panel-default'
+          a data-toggle='collapse' href='#testsuite-#{item["id"]}' class='overview'
+            div class='panel-heading'
+              h5
+                | #{item['testsuite']}     
+                span class='badge'
+                  | #{item['last_update']}
+              - sum = item['succeeded'] + item['failed'] + item['skipped'] + item['internal_error']
+              - succeeded_percentage = item['succeeded'] / sum * 100
+              - failed_percentage = item['failed'] / sum * 100
+              - skipped_percentage = item['skipped'] / sum * 100
+              - internal_error_percentage = item['internal_error'] / sum * 100
+              div class='progress'
+                div class="progress-bar progress-bar-success" role="progressbar" style="width:#{succeeded_percentage}%"
+                  | #{succeeded_percentage}% succeeded
+                div class="progress-bar progress-bar-danger" role="progressbar" style="width:#{failed_percentage}%"
+                  | #{failed_percentage}% failed
+                div class="progress-bar progress-bar-info" role="progressbar" style="width:#{skipped_percentage}%"
+                  | #{skipped_percentage}% skipped
+                div class="progress-bar progress-bar-success" role="progressbar" style="width:#{internal_error_percentage}%"
+                  | #{internal_error_percentage}% internal_error
+
+        div class='panel-collapse collapse panel-success' id='testsuite-#{item["id"]}'
+          div class='panel-body' id='testsuite-#{item["id"]}-show'
+            ul class='list-group'
+              li class='list-group-item'
+                span class='col-sm-1 item-label'
+                  | Last Update
+                span class='small item-label'
+                  | #{item['last_update']}
+              li class='list-group-item'
+                span class='col-sm-1 item-label'
+                  | Results
+                span class=' small item-label'
+                  div class='btn-group' role='group' id='#{item["id"]}'
+                    - testsuite = item['testsuite']
+                    - testsuite_id = item['id']
+                    button type='button' class='btn btn-default chart-option' data-time='1' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
+                      | Last day
+                    button type='button' class='btn btn-default chart-option' data-time='2' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
+                      | Last 2 days
+                    button type='button' class='btn btn-default chart-option' data-time='7' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
+                      | Last week
+                    button type='button' class='btn btn-default chart-option' data-time='14' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
+                      | Last 2 weeks
+                    button type='button' class='btn btn-default chart-option' data-time='30' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
+                      | Last Month
+                    button type='button' class='btn btn-default chart-option' data-time='90' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
+                      | Last Quater
+                    br
+                    br
+                    br
+                    div class='ct-chart-#{item["id"]}'
