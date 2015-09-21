@@ -1,28 +1,16 @@
-== README
+== Dashboard
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Dashboard is made for display test results from QADB. It can analyse results and display them as charts and lines.
 
-Things you may want to cover:
+Currently it can display test results according to build info and time.
 
-* Ruby version
+== Installation
 
-* System dependencies
+`git clone git@github.com:violetzijing/dashboard.git`
+`bundle exec rails s`
 
-* Configuration
+== Next
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Use MySQL
+* Display and analyse regression test results
+* Display performance test results
