@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150708091724) do
+ActiveRecord::Schema.define(version: 20150917154345) do
 
   create_table "qadb_results", force: :cascade do |t|
     t.string   "testsuite",                  null: false
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20150708091724) do
     t.integer  "internal_error", default: 0, null: false
     t.string   "log_url",                    null: false
     t.datetime "test_date",                  null: false
+    t.string   "product"
+    t.string   "release"
   end
 
 end

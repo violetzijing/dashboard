@@ -49,6 +49,11 @@ module Api
       render json: @qadb_results
     end
 
+    def search_by_build_info
+      @qadb_results = QadbResult.where({ testsuite: params[:testsuite], product: params[:product], release: params[:release] })
+      render json: @qadb_results
+    end
+
     private
 
     def result_params

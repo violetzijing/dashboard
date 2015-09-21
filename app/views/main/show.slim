@@ -39,22 +39,35 @@ html
               li class='list-group-item'
                 span class='col-sm-1 item-label'
                   | Results
-                span class=' small item-label'
-                  div class='btn-group' role='group' id='#{item["id"]}'
-                    - testsuite = item['testsuite']
-                    - testsuite_id = item['id']
-                    button type='button' class='btn btn-default chart-option' data-time='1' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
-                      | Last day
-                    button type='button' class='btn btn-default chart-option' data-time='2' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
-                      | Last 2 days
-                    button type='button' class='btn btn-default chart-option' data-time='7' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
-                      | Last week
-                    button type='button' class='btn btn-default chart-option' data-time='14' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
-                      | Last 2 weeks
-                    button type='button' class='btn btn-default chart-option' data-time='30' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
-                      | Last Month
-                    button type='button' class='btn btn-default chart-option' data-time='90' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
-                      | Last Quater
+                span class='small item-label'
+                  - testsuite = item['testsuite']
+                  - testsuite_id = item['id']
+                  - product = item['product']
+                  - release = item['release']
+                  div class='select-group' role='group'
+                    select class='selectpicker product-list' data-live-search="true" title='Products' data-testsuite='#{testsuite}'  data-id='#{testsuite_id}'
+                      - @product_list.each do |product_item|
+                        option data-resource='#{product_item}' class='chart-option' value='#{product_item}'
+                          | #{product_item}
+
+                    select class='selectpicker release-list' data-live-search="true" title='Release' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
+                      - @release_list.each do |release_item|
+                        option data-resource='#{release_item}' class='chart-option' value='#{release_item}'
+                          | #{release_item}
+
+                    select class='selectpicker past-day-list' data-live-search="true" title='Past Day' data-testsuite='#{testsuite}' data-id='#{testsuite_id}'
+                      option class='chart-option' value='1'
+                        | Last day
+                      option class='chart-option' value='2'
+                        | Last 2 days
+                      option class='chart-option' value='7'
+                        | Last week
+                      option class='chart-option' value='14'
+                        | Last 2 weeks
+                      option class='chart-option' value='30'
+                        | Last month
+                      option class='chart-option' value='90'
+                        | Last quater
                     br
                     br
                     br

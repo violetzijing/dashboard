@@ -12,6 +12,11 @@ class MainController < ApplicationController
     @qadb_results_internal_error = @qadb_results.group(:testsuite).average(:internal_error)
     @qadb_results_last_update    = @qadb_results.group(:testsuite).maximum(:test_date)
 
+    @product_list = []
+    @release_list = []
+    @qadb_results.select('product').distinct.each {|item| @product_list.push(item.product) }
+    @qadb_results.select('release').distinct.each {|item| @release_list.push(item.release) }
+
     @results_list = []
     n = 1
     @qadb_results_testsuite.each do |item|

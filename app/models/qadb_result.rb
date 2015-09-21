@@ -1,5 +1,7 @@
 class QadbResult < ActiveRecord::Base
   validates :testsuite,      presence: true
+  validates :product,        presence: true
+  validates :release,        presence: true
   validates :succeeded,      presence: true
   validates :failed,         presence: true
   validates :skipped,        presence: true
