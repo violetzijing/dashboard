@@ -6,8 +6,8 @@ Currently it can display test results according to build info and time.
 
 == Installation
 
-`git clone git@github.com:violetzijing/dashboard.git`
-`bundle exec rails s`
+git clone git@github.com:violetzijing/dashboard.git
+bundle exec rails s
 
 == Next
 
