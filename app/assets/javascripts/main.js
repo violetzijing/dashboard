@@ -1,7 +1,4 @@
 $(function () {
-  var product;
-  var release;
-  var past_day;
 
   function drawPic(data) {
     if (data.length > 0) {
@@ -34,32 +31,36 @@ $(function () {
       $('.ct-chart-' + id).html('<div class="alert alert-danger" role="alert">No results.</div>');
     }
 
-    chart.on('draw', function(data) {
-      if (data.type === 'point') {
-        var circle = new Chartist.Svg('circle', {
-          cx: [data.x], cy:[data.y], r:[3],
-        }, 'ct-circle');
-        data.element.replace(circle);
-      }
-    });
+    if (chart === undefined) {
+      $('.ct-chart-' + id).html('<div class="alert alert-danger" role="alert">No results.</div>');
+    } else {
+      chart.on('draw', function(data) {
+        if (data.type === 'point') {
+          var circle = new Chartist.Svg('circle', {
+            cx: [data.x], cy:[data.y], r:[3],
+          }, 'ct-circle');
+          data.element.replace(circle);
+        }
+      });
 
-    chart.on('draw', function(data) {
-      if(data.type === 'line' || data.type === 'area') {
-        data.element.animate({
-          d: {
-            begin: 1000 * data.index,
-            dur: 200,
-            from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-            to: data.path.clone().stringify(),
-            easing: Chartist.Svg.Easing.easeOutQuint
-          }
-        });
-      }
-    });
+      chart.on('draw', function(data) {
+        if(data.type === 'line' || data.type === 'area') {
+          data.element.animate({
+            d: {
+              begin: 1000 * data.index,
+              dur: 200,
+              from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+              to: data.path.clone().stringify(),
+              easing: Chartist.Svg.Easing.easeOutQuint
+            }
+          });
+        }
+      });
+    }
   }
 
   function drawChart(id, testsuite, product, release, past_day) {
-    if (product === undefined) {
+    if (product === null) {
       $('.ct-chart-' + id).html("");
       $.getJSON("/api/qadb_results/" + testsuite + "/past_days/" + past_day, function(data) {
         drawPic(data);
@@ -78,17 +79,29 @@ $(function () {
     past_day = $(this).val();
     testsuite = this.dataset.testsuite;
     id = this.dataset.id;
+    product = null;
+    release = null;
     drawChart(id, testsuite, product, release, past_day);
-  });
+    delete product;
+    delete release;
+    delete past_day;
+  })
 
   $('.product-list').change(function() {
     product = $(this).val();
-    testsuite = this.dataset.testsuite;
+    id = this.dataset.id;
+    $('.release-warning-' + id).html('<p style="color: red">Please choose a release</p>');
     $('.release-list').change(function() {
       release = $(this).val();
+      if (release != undefined) {
+        $('.release-warning-' + id).html('');
+      }
       testsuite = this.dataset.testsuite;
-      id = this.dataset.id;
+      past_day = null;
       drawChart(id, testsuite, product, release, past_day);
+      delete product;
+      delete release;
+      delete past_day;
     });
   })
 });
